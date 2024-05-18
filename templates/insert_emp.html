@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Employee</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(216, 76, 160, 0.1);
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff7e5f 25%, #7be8fe 25%, #6a11cb 25%, #ed31b4 25%);
+            background-size: 400% 400%;
+            animation: gradient 5s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            max-height: 90vh; /* Ensure the container is scrollable if necessary */
+            overflow-y: auto;
+        }
+
+        .header-box {
+            text-align: center;
+            background-color: #f0f8ff;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #38bade;
+            margin: 0;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="number"],
+        input[type="text"],
+        input[type="date"],
+        select {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #message-box {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 6px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-box">
+            <h1>Insert Employee</h1>
+        </div>
+        <div id="message-box"></div>
+        <form method="POST" action="{% url 'emp_display' %}">
+            {% csrf_token %}
+            <label for="eid">Emp ID</label>
+            <input type="number" name="eid" id="eid" required>
+
+            <label for="nm">Emp Name</label>
+            <input type="text" name="nm" id="nm" required>
+
+            <label for="sal">Emp Salary</label>
+            <input type="number" name="sal" id="sal" required>
+
+            <label for="jb">Job</label>
+            <input type="text" name="jb" id="jb" required>
+
+            <label for="hd">Hire Date</label>
+            <input type="date" name="hd" id="hd" required>
+
+            <label for="mgr">Manager</label>
+            <select name="mgr" id="mgr" required>
+                <option value="none">None</option>
+                {% for tt in QLEO %}
+                <option value="{{tt.emp_id}}">{{tt.emp_name}}</option>
+                {% endfor %}
+            </select>
+
+            <label for="cm">Commission</label>
+            <input type="number" name="cm" id="cm" required>
+
+            <label for="di">Dept ID</label>
+            <select name="di" id="di" required>
+                {% for tn in QLDO %}
+                <option value="{{tn.deptid}}">{{tn.deptname}}</option>
+                {% endfor %}
+            </select>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
