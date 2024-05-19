@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Display</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            animation: slideIn 1s ease-in-out;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            border: 1px solid #007bff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Display Employees</h1>
+        <table border="3px">
+            <tr>
+                <th>Emp ID</th>
+                <th>Emp Name</th>
+                <th>Emp Salary</th>
+                <th>Job</th>
+                <th>Hire Date</th>
+                <th>Manager</th>
+                <th>Commission</th>
+                <th>Dept ID</th>
+                <th>dept name</th>
+            </tr>
+            {% for wo in WOS %}
+            <tr>
+                <td>{{wo.emp_id}}</td>
+                <td>{{wo.emp_name}}</td>
+                <td>{{wo.emp_sal}}</td>
+                <td>{{wo.job}}</td>
+                <td>{{wo.hire_date}}</td>
+                <td>{{wo.mgr}}</td>
+                <td>{{wo.coomition}}</td>
+                <td>{{wo.deptid}}</td>
+                <td>{{wo.deptid.deptname}}</td>
+            </tr>
+            {% endfor %}  
+        </table>
+    </div>
+</body>
+</html>

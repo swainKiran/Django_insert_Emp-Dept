@@ -34,3 +34,21 @@ def emp_display(request):
 
     d = {'QLDO': QLDO, 'QLEO': QLEO}
     return render(request, 'insert_emp.html', d)
+
+def select_multiple(request):
+     QLDO = Dept.objects.all()
+     d = {'QLDO': QLDO}
+     if request.method == 'POST':
+        STL=request.POST.getlist('id')
+        WOS=Emp.objects.none()
+        for t in STL:
+            WOS=WOS|Emp.objects.filter(deptid=t)
+        d1={'WOS':WOS} 
+        return render(request,'display_emp.html', d1) 
+
+     return render(request,'select_multiple.html', d)
+   
+def checkBox(request):
+    QLTO=Dept.objects.all()
+    d={'QLTO':QLTO}
+    return render(request,'checkBox.html',d)   

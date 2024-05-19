@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dept_display/', dept_display,name='dept_display'),
     path('emp_display/',emp_display,name='emp_display'),
+    path('select_multiple/',select_multiple,name='select_multiple'),
+    path('checkBox/',checkBox,name='checkBox.html'),
 ]

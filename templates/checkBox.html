@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Departments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            margin-bottom: 1.5rem;
+            color: #333;
+            animation: slideIn 1s ease-in-out;
+        }
+        form {
+            text-align: left;
+        }
+        label {
+            font-size: 1rem;
+            color: #555;
+            margin-right: 10px;
+        }
+        input[type="checkbox"] {
+            transform: scale(1.2);
+            margin-right: 5px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            display: block;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select Departments</h1>
+        <form action="{% url 'select_multiple' %}" method="post">
+            {% csrf_token %}
+            {% for to in QLTO %}
+               <label for="id_{{ to.deptid }}">{{ to.deptname }}</label>
+               <input type="checkbox" name="id" id="id_{{ to.deptid }}" value="{{ to.deptid }}"><br><br>
+            {% endfor %}   
+            <input type="submit" value="Submit">   
+        </form>
+    </div>
+</body>
+</html>
